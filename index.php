@@ -2,10 +2,9 @@
 
 session_start();
 include ('config.php');
-$query = "SELECT `Nombre` FROM `Operadoras` ORDER BY `Nombre` ASC";
-$result = mysqli_query($conn, $query);
+require ('classes.php');
+$Func = new CommonFunctions();
 require_once('version.php');
-
 ?>
 <html>
 <head>
@@ -79,28 +78,25 @@ require_once('version.php');
       <div class="col-md-12 col-lg-6">
         <h4><p class="text-center">Selecciona tu operadora</p></h4>
         <select class="form-control" id="Operadora" name="Operadora">
-            <?php
-              while ($row = mysqli_fetch_array($result)){
-                echo "<option>" . $row["Nombre"] . "</option>";
-              }
-            ?>
-          </select>
-          <br/>
-          <br/>
-        </div>
-        <div class="col-md-12 col-lg-12">
-          <button type="submit" class="btn btn-primary center-block">Verificar</button>
-        </div>
-      </form>
-      <div class="col-md-12 col-lg-12">
-        <br>
-        <br>
+          <?php
+            $Func->FetchTelcos();
+          ?>
+        </select>
+        <br/>
+        <br/>
       </div>
+      <div class="col-md-12 col-lg-12">
+        <button type="submit" class="btn btn-primary center-block">Verificar</button>
+      </div>
+    </form>
+    <div class="col-md-12 col-lg-12">
+      <br>
+      <br>
     </div>
   </div>
+</div>
 <footer class="footer">
   <div class="container">
-
     <p class="text-muted">Verificador de Bandas <a href="/about"><?php echo $Version ?></a> Copyright © <?php echo date("Y") ?> Pisapapeles Networks Ltda.
       <br>Logos, material gráfico, y cualquier marca registrada es propiedad de sus respectivos dueños
       <br>Pisapapeles Networks Ltda. no se hace responsable por errores en la base de datos.
