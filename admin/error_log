@@ -1,0 +1,29 @@
+[12-Jul-2016 15:26:42 America/Los_Angeles] PHP Warning:  mysqli::mysqli(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/bndscl5/public_html/admin/config.php on line 18
+[12-Jul-2016 15:26:42 America/Los_Angeles] PHP Warning:  mysqli::set_charset(): Couldn't fetch mysqli in /home/bndscl5/public_html/admin/config.php on line 19
+[12-Jul-2016 15:28:08 America/Los_Angeles] PHP Warning:  mysqli::mysqli(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/bndscl5/public_html/admin/config.php on line 8
+[12-Jul-2016 15:28:08 America/Los_Angeles] PHP Warning:  mysqli::set_charset(): Couldn't fetch mysqli in /home/bndscl5/public_html/admin/config.php on line 9
+[12-Jul-2016 15:28:12 America/Los_Angeles] PHP Warning:  mysqli::mysqli(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/bndscl5/public_html/admin/config.php on line 8
+[12-Jul-2016 15:28:12 America/Los_Angeles] PHP Warning:  mysqli::set_charset(): Couldn't fetch mysqli in /home/bndscl5/public_html/admin/config.php on line 9
+[12-Jul-2016 15:28:12 America/Los_Angeles] PHP Warning:  mysqli_query(): Couldn't fetch mysqli in /home/bndscl5/public_html/admin/list.php on line 6
+[12-Jul-2016 15:28:12 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/bndscl5/public_html/admin/list.php on line 66
+[12-Jul-2016 17:27:54 America/Los_Angeles] PHP Warning:  mysqli::mysqli(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/bndscl5/public_html/admin/config.php on line 8
+[12-Jul-2016 17:27:54 America/Los_Angeles] PHP Warning:  mysqli::set_charset(): Couldn't fetch mysqli in /home/bndscl5/public_html/admin/config.php on line 9
+[12-Jul-2016 17:27:54 America/Los_Angeles] PHP Warning:  mysqli_query(): Couldn't fetch mysqli in /home/bndscl5/public_html/admin/list.php on line 6
+[12-Jul-2016 17:27:54 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/bndscl5/public_html/admin/list.php on line 66
+[18-Jul-2016 23:21:16 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:21:29 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:21:52 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:22:01 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:23:15 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:29:44 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:29:47 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:29:58 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:33:16 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:34:46 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[18-Jul-2016 23:36:37 America/Los_Angeles] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/bndscl5/public_html/admin/edit.php on line 9
+[31-Jul-2016 22:52:33 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '{' in /home/bndscl5/public_html/admin/add.php on line 49
+[31-Jul-2016 22:53:22 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '{' in /home/bndscl5/public_html/admin/add.php on line 49
+[31-Jul-2016 22:56:47 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '{' in /home/bndscl5/public_html/admin/add.php on line 50
+[31-Jul-2016 22:56:50 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '{' in /home/bndscl5/public_html/admin/add.php on line 50
+[31-Jul-2016 22:57:22 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/bndscl5/public_html/admin/add.php on line 50
+[31-Jul-2016 22:58:20 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/bndscl5/public_html/admin/deleteSolicitud.php on line 23

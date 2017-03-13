@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "admin"
+AuthUserFile "/home/bndscl5/.htpasswds/public_html/admin/passwd"
+require valid-user
