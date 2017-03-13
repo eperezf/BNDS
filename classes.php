@@ -1,5 +1,4 @@
 <?
-
 class CommonFunctions {
   function FetchTelcos(){
     include ('config.php');

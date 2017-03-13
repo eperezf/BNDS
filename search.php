@@ -6,7 +6,7 @@ include_once('config.php');
 $array = array();
 
 
-$sql="SELECT * FROM `Telefono` WHERE `NombreCompleto` LIKE '%" . $query . "%' ORDER BY CASE WHEN `NombreCompleto` LIKE '" . mysqli_real_escape_string($conn, $query) . "%' THEN 1 ELSE 2 END, `NombreCompleto`";
+$sql="SELECT * FROM `Telefono` WHERE `NombreCompleto` LIKE '%" . mysqli_real_escape_string($conn, $query) . "%' ORDER BY CASE WHEN `NombreCompleto` LIKE '" . mysqli_real_escape_string($conn, $query) . "%' THEN 1 ELSE 2 END, `NombreCompleto`";
 
 $result=mysqli_query($conn, $sql);
 
