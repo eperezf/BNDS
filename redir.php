@@ -1,23 +1,18 @@
 <?php
+require ('classes.php');
+$Func = new CommonFunctions();
 
 session_start();
-if (!isset($_GET["Operadora"])){
-  $_SESSION["Alert"] = "Por favor selecciona una operadora";
+
+$Func->CheckOperadora($_GET["Operadora"]);
+
+$Func->CheckTelefono($_GET["Telefono"]);
+
+if (ctype_digit($_GET["Telefono"])) {
+  $_SESSION["Alert"] = "Estás buscando un IMEI!";
   header("Location: /");
   die;
 }
-
-if ($_GET["Telefono"] == ""){
-  $_SESSION["Alert"] = "Por favor busca un teléfono";
-  header("Location: /");
-  die;
-}
-
-else {
-	$Telefono = str_replace(" ", "+", $_GET["Telefono"]);
-	$Operadora = str_replace(" ", "+", $_GET["Operadora"]);
-	header("Location: /ver/$Telefono/$Operadora");
-}
-
-
-
+$Telefono = $Func->Slugify($_GET["Telefono"]);
+$Operadora = $Func->Slugify($_GET["Operadora"]);
+header("Location: /ver/$Telefono/$Operadora");

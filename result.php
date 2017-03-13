@@ -1,16 +1,14 @@
 <?php
 
-if (!isset($_GET["Operadora"])){
-  $_SESSION["Alert"] = "Por favor selecciona una operadora";
-  header("Location: /");
-  die;
-}
-
 session_start();
-
-require_once('classesv2.php');
+require_once('classes.php');
 require_once('version.php');
 require_once('config.php');
+require_once('classesv2.php');
+$Func = new CommonFunctions();
+
+
+
 $Operadora = new Operadora($_GET["Operadora"]);
 $Telefono = new Telefono($_GET["Telefono"]);
 $Comparacion = new Comparacion;
@@ -236,24 +234,24 @@ if ($LTEList == ""){
 //LTE-Advanced SECTION
 if ($_GET["Operadora"] == "Entel" || $_GET["Operadora"] == "Movistar" || $_GET["Operadora"] == "Claro" || $_GET["Operadora"] == "VTR"){
   if ($Telefono->LTEA == "1"){
-    $LTEABoxText = $OKIcon . " Compatible con 4G+"; 
+    $LTEABoxText = $OKIcon . " Compatible con 4G+";
     $LTEABoxType = "Success";
     $LTEAResponse = 'es compatible con 4G+.';
   }
   else {
-    $LTEABoxText = $DangerIcon . " No compatible con 4G+"; 
+    $LTEABoxText = $DangerIcon . " No compatible con 4G+";
     $LTEABoxType = "danger";
     $LTEAResponse = 'no es compatible con 4G+.';
   };
 }
 else {
   if ($Telefono->LTEA == "1"){
-    $LTEABoxText = $WarningIcon . " Compatible con 4G+"; 
+    $LTEABoxText = $WarningIcon . " Compatible con 4G+";
     $LTEABoxType = "warning";
     $LTEAResponse = 'es compatible con 4G+ pero ' . $_GET["Operadora"] . ' no posee este servicio.';
   }
   else {
-    $LTEABoxText = $DangerIcon . " No compatible con 4G+"; 
+    $LTEABoxText = $DangerIcon . " No compatible con 4G+";
     $LTEABoxType = "danger";
     $LTEAResponse = 'no es compatible con 4G+.';
   };
@@ -262,24 +260,24 @@ else {
 //HD VOICE SECTION
 if ($_GET["Operadora"] == "Entel" || $_GET["Operadora"] == "WOM"){
   if ($Telefono->HDVoice == "1"){
-    $HDVoiceBoxText = $OKIcon . " Compatible con Voz HD"; 
+    $HDVoiceBoxText = $OKIcon . " Compatible con Voz HD";
     $HDVoiceBoxType = "Success";
     $HDVoiceResponse = 'es compatible con Voz HD.';
   }
   else {
-    $HDVoiceBoxText = $DangerIcon . " No compatible con Voz HD"; 
+    $HDVoiceBoxText = $DangerIcon . " No compatible con Voz HD";
     $HDVoiceBoxType = "danger";
     $HDVoiceResponse = 'no es compatible con Voz HD.';
   };
 }
 else {
   if ($Telefono->HDVoice == "1"){
-    $HDVoiceBoxText = $WarningIcon . " Compatible con Voz HD"; 
+    $HDVoiceBoxText = $WarningIcon . " Compatible con Voz HD";
     $HDVoiceBoxType = "warning";
     $HDVoiceResponse = 'es compatible con Voz HD pero ' . $_GET["Operadora"] . ' no posee este servicio.';
   }
   else {
-    $HDVoiceBoxText = $DangerIcon . " No compatible con Voz HD"; 
+    $HDVoiceBoxText = $DangerIcon . " No compatible con Voz HD";
     $HDVoiceBoxType = "danger";
     $HDVoiceResponse = 'no es compatible con Voz HD.';
   };
@@ -287,12 +285,12 @@ else {
 
 
 if ($Telefono->SAE == "1"){
-    $SAEBoxText = $OKIcon . " Compatible con SAE"; 
+    $SAEBoxText = $OKIcon . " Compatible con SAE";
     $SAEBoxType = "Success";
     $SAEResponse = 'es compatible con el Sistema de Alertas de Emergencia.';
   }
   else {
-    $SAEBoxText = $DangerIcon . " No compatible con SAE"; 
+    $SAEBoxText = $DangerIcon . " No compatible con SAE";
     $SAEBoxType = "danger";
     $SAEResponse = "no es compatible con el Sistema de Alertas de Emergencia.";
   };
@@ -380,7 +378,7 @@ $LinkFotoOp = str_replace("ó", "o", $LinkFotoOp);
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/">Inicio</a></li>  
+        <li><a href="/">Inicio</a></li>
         <li><a href="/about">Acerca de</a></li>
       </ul>
     </div>
@@ -488,7 +486,7 @@ $LinkFotoOp = str_replace("ó", "o", $LinkFotoOp);
                 <form action="/redir.php" method="get">
                   <input type="hidden" id="Telefono" name="Telefono" value="<?php echo $Telefono->NombreCompleto ?>">
                   <select class="form-control" id="Operadora" name="Operadora">
-                    <?php 
+                    <?php
                       while ($OpRow = mysqli_fetch_array($OpResult)){
                         echo "<option>" . $OpRow["Nombre"] . "</option>";
                       }
@@ -509,7 +507,7 @@ $LinkFotoOp = str_replace("ó", "o", $LinkFotoOp);
 </div>
 <footer class="footer">
   <div class="container">
-    <p class="text-muted">Verificador de Bandas <a href="/about"><?php echo $Version ?></a> Copyright © <?php echo date("Y") ?> Pisapapeles Networks Ltda. 
+    <p class="text-muted">Verificador de Bandas <a href="/about"><?php echo $Version ?></a> Copyright © <?php echo date("Y") ?> Pisapapeles Networks Ltda.
       <br>Logos, material gráfico, y cualquier marca registrada es propiedad de sus respectivos dueños
       <br>Pisapapeles Networks Ltda. no se hace responsable por errores en la base de datos.
     </p>
