@@ -4,7 +4,6 @@ session_start();
 require_once('classes.php');
 require_once('version.php');
 require_once('config.php');
-require_once('classesv2.php');
 $Func = new CommonFunctions();
 $Operadora = new Operadora($_GET["Operadora"]);
 $Operadora->GetBandas();
