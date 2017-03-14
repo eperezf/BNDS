@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include ('config.php');
 require_once('version.php');
@@ -13,7 +13,7 @@ if ($conn->ping()) {
     $Status = "Houston, tenemos un problema. Por favor envía un correo a contacto@bnds.cl.";
 }
 
-$query = "SELECT COUNT(*) as Telefonos FROM Telefonos";
+$query = "SELECT COUNT(*) as Telefonos FROM Telefono";
 $result = mysqli_query($conn, $query);
 while ($row = mysqli_fetch_array($result)){
   $Telefonos = $row["Telefonos"];
@@ -58,7 +58,7 @@ while ($row = mysqli_fetch_array($result)){
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/">Inicio</a></li>      
+        <li><a href="/">Inicio</a></li>
         <li class="active"><a href="#">Acerca de</a></li>
       </ul>
     </div>
@@ -75,7 +75,7 @@ while ($row = mysqli_fetch_array($result)){
 </div>
 <footer class="footer">
   <div class="container">
-    <p class="text-muted">Verificador de Bandas <a href="/about"><?php echo $Version ?></a> Copyright © <?php echo date("Y") ?> Pisapapeles Networks Ltda. 
+    <p class="text-muted">Verificador de Bandas <a href="/about"><?php echo $Version ?></a> Copyright © <?php echo date("Y") ?> Pisapapeles Networks Ltda.
       <br>Logos, material gráfico, y cualquier marca registrada es propiedad de sus respectivos dueños
       <br>Pisapapeles Networks Ltda. no se hace responsable por errores en la base de datos.
     </p>
