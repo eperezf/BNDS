@@ -6,10 +6,10 @@ require_once('version.php');
 require_once('config.php');
 require_once('classesv2.php');
 $Func = new CommonFunctions();
-
-
-
 $Operadora = new Operadora($_GET["Operadora"]);
+$Operadora->GetBandas();
+
+
 $Telefono = new Telefono($_GET["Telefono"]);
 $Comparacion = new Comparacion;
 
@@ -19,7 +19,7 @@ $LTEList = "";
 
 $LinkFoto = str_replace(" ", "", $Telefono->Marca) . str_replace(" ", "", $Telefono->Modelo);
 
-$Operadora->GetBandas();
+
 $GSM1900 = $Comparacion->ProcessBand($Operadora->GSM1900, $Telefono->GSM1900, "GSM1900");
 $GSM900 = $Comparacion->ProcessBand($Operadora->GSM900, $Telefono->GSM900, "GSM900");
 $GSM850 = $Comparacion->ProcessBand($Operadora->GSM850, $Telefono->GSM850, "GSM850");
