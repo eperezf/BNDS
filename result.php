@@ -8,9 +8,8 @@ require_once('classesv2.php');
 $Func = new CommonFunctions();
 $Operadora = new Operadora($_GET["Operadora"]);
 $Operadora->GetBandas();
-
-
 $Telefono = new Telefono($_GET["Telefono"]);
+
 $Comparacion = new Comparacion;
 
 $GSMList = "";
@@ -31,57 +30,57 @@ $LTE2600 = $Comparacion->ProcessBand($Operadora->LTE2600, $Telefono->LTE2600, "L
 $LTE700 = $Comparacion->ProcessBand($Operadora->LTE700, $Telefono->LTE700, "LTE700");
 $LTEAWS = $Comparacion->ProcessBand($Operadora->LTEAWS, $Telefono->LTEAWS, "LTEAWS");
 
+$Comparacion->ProcessLTEA($Operadora->LTEA, $Telefono->LTEA, $Operadora->Nombre);
+
 $Comparacion->ProcessResult();
 
-$OKIcon = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
-$WarningIcon = '<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ';
-$DangerIcon = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ';
+
 
 if ($Comparacion->GSMResult == "OK"){
-  $GSMBoxText = $OKIcon . "100% Compatible con 2G";
+  $GSMBoxText = $Func->OKIcon . "100% Compatible con 2G";
   $GSMBoxType = "success";
 }
 if ($Comparacion->GSMResult == "PARTIAL"){
-  $GSMBoxText = $WarningIcon . "Parcialmente compatible con 2G";
+  $GSMBoxText = $Func->WarningIcon . "Parcialmente compatible con 2G";
   $GSMBoxType = "warning";
 }
 if ($Comparacion->GSMResult == "ERROR"){
-  $GSMBoxText = $DangerIcon . "No compatible con 2G";
+  $GSMBoxText = $Func->DangerIcon . "No compatible con 2G";
   $GSMBoxType = "danger";
 }
 
 if ($Comparacion->UMTSResult == "OK"){
-  $UMTSBoxText = $OKIcon . "100% Compatible con 3G";
+  $UMTSBoxText = $Func->OKIcon . "100% Compatible con 3G";
   $UMTSBoxType = "success";
 }
 if ($Comparacion->UMTSResult == "PARTIAL"){
-  $UMTSBoxText = $WarningIcon . "Parcialmente compatible con 3G";
+  $UMTSBoxText = $Func->WarningIcon . "Parcialmente compatible con 3G";
   $UMTSBoxType = "warning";
 }
 if ($Comparacion->UMTSResult == "ERROR"){
-  $UMTSBoxText = $DangerIcon . "No compatible con 3G";
+  $UMTSBoxText = $Func->DangerIcon . "No compatible con 3G";
   $UMTSBoxType = "danger";
 }
 
 if ($Comparacion->LTEResult == "OK"){
-  $LTEBoxText = $OKIcon . "100% Compatible con 4G";
+  $LTEBoxText = $Func->OKIcon . "100% Compatible con 4G";
   $LTEBoxType = "success";
 }
 if ($Comparacion->LTEResult == "PARTIAL"){
-  $LTEBoxText = $WarningIcon . "Parcialmente compatible con 4G";
+  $LTEBoxText = $Func->WarningIcon . "Parcialmente compatible con 4G";
   $LTEBoxType = "warning";
 }
 if ($Comparacion->LTEResult == "ERROR"){
-  $LTEBoxText = $DangerIcon . "No compatible con 4G";
+  $LTEBoxText = $Func->DangerIcon . "No compatible con 4G";
   $LTEBoxType = "danger";
 }
 
 if ($Operadora->GSM1900 == "TRUE"){
   if ($Comparacion->GSM1900Result == "OK"){
-    $GSMList = $GSMList . "<p>" . $OKIcon;
+    $GSMList = $GSMList . "<p>" . $Func->OKIcon;
   }
   else {
-    $GSMList = $GSMList . "<p>" . $DangerIcon;
+    $GSMList = $GSMList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->GSM1900Roaming == "TRUE"){
     $GSMList = $GSMList . '1900MHz. (Roaming en ' . $Operadora->GSM1900RoamingOperadora . ')</p>';
@@ -93,10 +92,10 @@ if ($Operadora->GSM1900 == "TRUE"){
 
 if ($Operadora->GSM900 == "TRUE"){
   if ($Comparacion->GSM900Result == "OK"){
-    $GSMList = $GSMList . "<p>" . $OKIcon;
+    $GSMList = $GSMList . "<p>" . $Func->OKIcon;
   }
   else {
-    $GSMList = $GSMList . "<p>" . $DangerIcon;
+    $GSMList = $GSMList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->GSM900Roaming == "TRUE"){
     $GSMList = $GSMList . '900MHz. (Roaming en ' . $Operadora->GSM900RoamingOperadora . ')</p>';
@@ -108,10 +107,10 @@ if ($Operadora->GSM900 == "TRUE"){
 
 if ($Operadora->GSM850 == "TRUE"){
   if ($Comparacion->GSM850Result == "OK"){
-    $GSMList = $GSMList . "<p>" . $OKIcon;
+    $GSMList = $GSMList . "<p>" . $Func->OKIcon;
   }
   else {
-    $GSMList = $GSMList . "<p>" . $DangerIcon;
+    $GSMList = $GSMList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->GSM850Roaming == "TRUE"){
     $GSMList = $GSMList . '850MHz. (Roaming en ' . $Operadora->GSM850RoamingOperadora . ')</p>';
@@ -123,10 +122,10 @@ if ($Operadora->GSM850 == "TRUE"){
 
 if ($Operadora->UMTS1900 == "TRUE"){
   if ($Comparacion->UMTS1900Result == "OK"){
-    $UMTSList = $UMTSList . "<p>" . $OKIcon;
+    $UMTSList = $UMTSList . "<p>" . $Func->OKIcon;
   }
   else {
-    $UMTSList = $UMTSList . "<p>" . $DangerIcon;
+    $UMTSList = $UMTSList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->UMTS1900Roaming == "TRUE"){
     $UMTSList = $UMTSList . '1900MHz. (Roaming en ' . $Operadora->UMTS1900RoamingOperadora . ')</p>';
@@ -138,10 +137,10 @@ if ($Operadora->UMTS1900 == "TRUE"){
 
 if ($Operadora->UMTS900 == "TRUE"){
   if ($Comparacion->UMTS900Result == "OK"){
-    $UMTSList = $UMTSList . "<p>" . $OKIcon;
+    $UMTSList = $UMTSList . "<p>" . $Func->OKIcon;
   }
   else {
-    $UMTSList = $UMTSList . "<p>" . $DangerIcon;
+    $UMTSList = $UMTSList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->UMTS900Roaming == "TRUE"){
     $UMTSList = $UMTSList . '900MHz. (Roaming en ' . $Operadora->UMTS900RoamingOperadora . ')</p>';
@@ -153,10 +152,10 @@ if ($Operadora->UMTS900 == "TRUE"){
 
 if ($Operadora->UMTS850 == "TRUE"){
   if ($Comparacion->UMTS850Result == "OK"){
-    $UMTSList = $UMTSList . "<p>" . $OKIcon;
+    $UMTSList = $UMTSList . "<p>" . $Func->OKIcon;
   }
   else {
-    $UMTSList = $UMTSList . "<p>" . $DangerIcon;
+    $UMTSList = $UMTSList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->UMTS850Roaming == "TRUE"){
     $UMTSList = $UMTSList . '850MHz. (Roaming en ' . $Operadora->UMTS850RoamingOperadora . ')</p>';
@@ -168,10 +167,10 @@ if ($Operadora->UMTS850 == "TRUE"){
 
 if ($Operadora->UMTSAWS == "TRUE"){
   if ($Comparacion->UMTSAWSResult == "OK"){
-    $UMTSList = $UMTSList . "<p>" . $OKIcon;
+    $UMTSList = $UMTSList . "<p>" . $Func->OKIcon;
   }
   else {
-    $UMTSList = $UMTSList . "<p>" . $DangerIcon;
+    $UMTSList = $UMTSList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->UMTSAWSRoaming == "TRUE"){
     $UMTSList = $UMTSList . '1700/2100MHz. (AWS) (Roaming en ' . $Operadora->UMTSAWSRoamingOperadora . ')</p>';
@@ -183,10 +182,10 @@ if ($Operadora->UMTSAWS == "TRUE"){
 
 if ($Operadora->LTE2600 == "TRUE"){
   if ($Comparacion->LTE2600Result == "OK"){
-    $LTEList = $LTEList . "<p>" . $OKIcon;
+    $LTEList = $LTEList . "<p>" . $Func->OKIcon;
   }
   else {
-    $LTEList = $LTEList . "<p>" . $DangerIcon;
+    $LTEList = $LTEList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->LTE2600Roaming == "TRUE"){
     $LTEList = $LTEList . '2600MHz. (Roaming en ' . $Operadora->LTE2600RoamingOperadora . ')</p>';
@@ -198,10 +197,10 @@ if ($Operadora->LTE2600 == "TRUE"){
 
 if ($Operadora->LTE700 == "TRUE"){
   if ($Comparacion->LTE700Result == "OK"){
-    $LTEList = $LTEList . "<p>" . $OKIcon;
+    $LTEList = $LTEList . "<p>" . $Func->OKIcon;
   }
   else {
-    $LTEList = $LTEList . "<p>" . $DangerIcon;
+    $LTEList = $LTEList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->LTE700Roaming == "TRUE"){
     $LTEList = $LTEList . '700MHz. (Roaming en ' . $Operadora->LTE700RoamingOperadora . ')</p>';
@@ -213,10 +212,10 @@ if ($Operadora->LTE700 == "TRUE"){
 
 if ($Operadora->LTEAWS == "TRUE"){
   if ($Comparacion->LTEAWSResult == "OK"){
-    $LTEList = $LTEList . "<p>" . $OKIcon;
+    $LTEList = $LTEList . "<p>" . $Func->OKIcon;
   }
   else {
-    $LTEList = $LTEList . "<p>" . $DangerIcon;
+    $LTEList = $LTEList . "<p>" . $Func->DangerIcon;
   }
   if ($Operadora->LTEAWSRoaming == "TRUE"){
     $LTEList = $LTEList . '1700/2100MHz. (AWS) (Roaming en ' . $Operadora->LTEAWSRoamingOperadora . ')</p>';
@@ -226,71 +225,45 @@ if ($Operadora->LTEAWS == "TRUE"){
   }
 }
 if ($LTEList == ""){
-  $LTEList = "<p>" . $WarningIcon . $Operadora->Nombre . " no opera en 4G</p>";
-  $LTEBoxText = $DangerIcon . $Operadora->Nombre . " no opera en 4G";
+  $LTEList = "<p>" . $Func->WarningIcon . $Operadora->Nombre . " no opera en 4G</p>";
+  $LTEBoxText = $Func->DangerIcon . $Operadora->Nombre . " no opera en 4G";
   $LTEBoxType = "danger";
 }
 
-//LTE-Advanced SECTION
-if ($_GET["Operadora"] == "Entel" || $_GET["Operadora"] == "Movistar" || $_GET["Operadora"] == "Claro" || $_GET["Operadora"] == "VTR"){
-  if ($Telefono->LTEA == "1"){
-    $LTEABoxText = $OKIcon . " Compatible con 4G+";
-    $LTEABoxType = "Success";
-    $LTEAResponse = 'es compatible con 4G+.';
-  }
-  else {
-    $LTEABoxText = $DangerIcon . " No compatible con 4G+";
-    $LTEABoxType = "danger";
-    $LTEAResponse = 'no es compatible con 4G+.';
-  };
-}
-else {
-  if ($Telefono->LTEA == "1"){
-    $LTEABoxText = $WarningIcon . " Compatible con 4G+";
-    $LTEABoxType = "warning";
-    $LTEAResponse = 'es compatible con 4G+ pero ' . $_GET["Operadora"] . ' no posee este servicio.';
-  }
-  else {
-    $LTEABoxText = $DangerIcon . " No compatible con 4G+";
-    $LTEABoxType = "danger";
-    $LTEAResponse = 'no es compatible con 4G+.';
-  };
-}
-
-//HD VOICE SECTION
-if ($_GET["Operadora"] == "Entel" || $_GET["Operadora"] == "WOM"){
-  if ($Telefono->HDVoice == "1"){
-    $HDVoiceBoxText = $OKIcon . " Compatible con Voz HD";
-    $HDVoiceBoxType = "Success";
-    $HDVoiceResponse = 'es compatible con Voz HD.';
-  }
-  else {
-    $HDVoiceBoxText = $DangerIcon . " No compatible con Voz HD";
-    $HDVoiceBoxType = "danger";
-    $HDVoiceResponse = 'no es compatible con Voz HD.';
-  };
-}
-else {
-  if ($Telefono->HDVoice == "1"){
-    $HDVoiceBoxText = $WarningIcon . " Compatible con Voz HD";
-    $HDVoiceBoxType = "warning";
-    $HDVoiceResponse = 'es compatible con Voz HD pero ' . $_GET["Operadora"] . ' no posee este servicio.';
-  }
-  else {
-    $HDVoiceBoxText = $DangerIcon . " No compatible con Voz HD";
-    $HDVoiceBoxType = "danger";
-    $HDVoiceResponse = 'no es compatible con Voz HD.';
-  };
-}
 
 
-if ($Telefono->SAE == "1"){
-    $SAEBoxText = $OKIcon . " Compatible con SAE";
+if ($Operadora->HDVoice == "TRUE" && $Telefono->HDVoice == "TRUE"){
+  //Operadora y teléfono comaptibles
+  $HDVoiceBoxText = $Func->OKIcon . " Compatible con Voz HD";
+  $HDVoiceBoxType = "Success";
+  $HDVoiceResponse = 'es compatible con Voz HD.';
+}
+elseif ($Operadora->HDVoice == "TRUE" && $Telefono->HDVoice == "FALSE"){
+  //Solo operadora compatible
+  $HDVoiceBoxText = $Func->DangerIcon . " No compatible con Voz HD";
+  $HDVoiceBoxType = "danger";
+  $HDVoiceResponse = 'no es compatible con Voz HD.';
+}
+elseif ($Operadora->HDVoice == "FALSE" && $Telefono->HDVoice == "TRUE"){
+  //Solo teléfono compatible
+  $HDVoiceBoxText = $Func->WarningIcon . " Compatible con Voz HD";
+  $HDVoiceBoxType = "warning";
+  $HDVoiceResponse = 'es compatible con Voz HD pero ' . $Operadora->Nombre . ' no posee este servicio.';
+}
+elseif ($Operadora->HDVoice == "FALSE" && $Telefono->HDVoice == "FALSE"){
+  //Ninguno es compatible
+  $HDVoiceBoxText = $Func->DangerIcon . " No compatible con Voz HD";
+  $HDVoiceBoxType = "danger";
+  $HDVoiceResponse = 'no es compatible con Voz HD.';
+}
+
+if ($Telefono->SAE == "TRUE"){
+    $SAEBoxText = $Func->OKIcon . " Compatible con SAE";
     $SAEBoxType = "Success";
     $SAEResponse = 'es compatible con el Sistema de Alertas de Emergencia.';
   }
   else {
-    $SAEBoxText = $DangerIcon . " No compatible con SAE";
+    $SAEBoxText = $Func->DangerIcon . " No compatible con SAE";
     $SAEBoxType = "danger";
     $SAEResponse = "no es compatible con el Sistema de Alertas de Emergencia.";
   };
@@ -439,15 +412,15 @@ $LinkFotoOp = str_replace("ó", "o", $LinkFotoOp);
                     </div>
                   </div>
                 </div>
-                  <div class="panel panel-<?php echo $LTEABoxType ?>">
+                  <div class="panel panel-<?php echo $Comparacion->LTEABoxType ?>">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#LTEA"><?php echo $LTEABoxText ?><span class="pull-right glyphicon glyphicon-chevron-down"></span></a>
+                        <a data-toggle="collapse" href="#LTEA"><?php echo $Comparacion->LTEABoxText ?><span class="pull-right glyphicon glyphicon-chevron-down"></span></a>
                       </h4>
                     </div>
                     <div id="LTEA" class="panel-collapse collapse">
                       <div class="panel-body">
-                        <p>El <?php echo $Telefono->Marca ?> <?php echo $Telefono->Modelo ?> <?php if ($Telefono->Variante != ""){ echo "variante";} ?> <?php echo $Telefono->Variante ?> <?php echo $LTEAResponse ?></p>
+                        <p>El <?php echo $Telefono->Marca ?> <?php echo $Telefono->Modelo ?> <?php if ($Telefono->Variante != ""){ echo "variante";} ?> <?php echo $Telefono->Variante ?> <?php echo $Comparacion->LTEAResponse ?></p>
                       </div>
                     </div>
                   </div>
@@ -487,9 +460,7 @@ $LinkFotoOp = str_replace("ó", "o", $LinkFotoOp);
                   <input type="hidden" id="Telefono" name="Telefono" value="<?php echo $Telefono->NombreCompleto ?>">
                   <select class="form-control" id="Operadora" name="Operadora">
                     <?php
-                      while ($OpRow = mysqli_fetch_array($OpResult)){
-                        echo "<option>" . $OpRow["Nombre"] . "</option>";
-                      }
+                      $Func->FetchTelcos();
                     ?>
                   </select>
                   </br>

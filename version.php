@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-$Version = "1.3.4"; 
+$Version = "1.9.3-dev"; 
 $Codename = "Faith No More";
 
 ?>

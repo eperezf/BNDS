@@ -1,5 +1,10 @@
 <?
 class CommonFunctions {
+
+  public $OKIcon = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
+  public $WarningIcon = '<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ';
+  public $DangerIcon = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ';
+
   function FetchTelcos(){
     include ('config.php');
     $query = "SELECT `Nombre` FROM `Operadora` ORDER BY `Nombre` ASC";
@@ -357,9 +362,15 @@ class Telefono {
   		$this->Variante = $row["Variante"];
       $this->NombreCompleto = $row["NombreCompleto"];
   		$this->LinkReview = $row["LinkReview"];
-  		$this->LTEA = $row["LTEA"];
-  		$this->HDVoice = $row["HDVoice"];
-  		$this->SAE = $row["SAE"];
+      if ($row["LTEA"] == "1"){
+        $this->LTEA = "TRUE";
+      };
+      if ($row["HDVoice"] == "1"){
+        $this->HDVoice = "TRUE";
+      };
+      if ($row["SAE"] == "1"){
+        $this->SAE = "TRUE";
+      }
 		};
 		$query = "";
 		$result = "";
@@ -420,4 +431,290 @@ class Telefono {
 			};
 		}
 	}
+}
+
+/**
+* Clase para comparar teléfono y bandas
+* @author Eduardo Pérez
+* @version 1.1
+* @category Processer
+* @todo Nada por ahora
+*/
+class Comparacion {
+
+  public $OKIcon = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
+  public $WarningIcon = '<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ';
+  public $DangerIcon = '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ';
+
+	public $GSM1900Result;
+	public $GSM900Result;
+	public $GSM850Result;
+	public $UMTS1900Result;
+	public $UMTS900Result;
+	public $UMTS850Result;
+	public $UMTSAWSResult;
+	public $LTE2600Result;
+	public $LTE700Result;
+	public $LTEAWSResult;
+
+	public $GSMResult;
+	public $UMTSResult;
+	public $LTEResult;
+
+  public $LTEABoxText;
+  public $LTEABoxType;
+  public $LTEAResponse;
+
+	function ProcessBand ($OperadoraInput, $TelefonoInput, $BandaInput){
+
+		if ($BandaInput == "GSM1900"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->GSM1900Result = "OK";
+				return "La operadora posee banda 2G 1900MHz. y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->GSM1900Result = "ERROR";
+				return "La operadora posee banda 2G 1900MHz. pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->GSM1900Result = "IRRELEVANT";
+				return "La operadora no posee banda 2G 1900MHz. y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->GSM1900Result = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 2G 1900MHz. No importa.";
+			};
+		}
+		if ($BandaInput == "GSM900"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->GSM900Result = "OK";
+				return "La operadora posee banda 2G 900MHz. y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->GSM900Result = "ERROR";
+				return "La operadora posee banda 2G 900MHz. pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->GSM900Result = "IRRELEVANT";
+				return "La operadora no posee banda 2G 900MHz. y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->GSM900Result = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 2G 900MHz. No importa.";
+			};
+		}
+		if ($BandaInput == "GSM850"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->GSM850Result = "OK";
+				return "La operadora posee banda 2G 850MHz. y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->GSM850Result = "ERROR";
+				return "La operadora posee banda 2G 850MHz. pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->GSM850Result = "IRRELEVANT";
+				return "La operadora no posee banda 2G 850MHz. y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->GSM850Result = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 2G 850MHz. No importa.";
+			};
+		}
+		if ($BandaInput == "UMTS1900"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->UMTS1900Result = "OK";
+				return "La operadora posee banda 3G 1900MHz. y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->UMTS1900Result = "ERROR";
+				return "La operadora posee banda 3G 1900MHz. pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->UMTS1900Result = "IRRELEVANT";
+				return "La operadora no posee banda 3G 1900MHz. y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->UMTS1900Result = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 3G 1900MHz. No importa.";
+			};
+		}
+		if ($BandaInput == "UMTS900"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->UMTS900Result = "OK";
+				return "La operadora posee banda 3G 900MHz. y el teléfono es compatible.";
+
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->UMTS900Result = "ERROR";
+				return "La operadora posee banda 3G 900MHz. pero el teléfono no es compatible.";
+
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->UMTS900Result = "IRRELEVANT";
+				return "La operadora no posee banda 3G 900MHz. y el teléfono sí. No importa.";
+
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->UMTS900Result = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 3G 900MHz. No importa.";
+
+			};
+		}
+		if ($BandaInput == "UMTS850"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->UMTS850Result = "OK";
+				return "La operadora posee banda 3G 850MHz. y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->UMTS850Result = "ERROR";
+				return "La operadora posee banda 3G 850MHz. pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->UMTS850Result = "IRRELEVANT";
+				return "La operadora no posee banda 3G 850MHz. y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->UMTS850Result = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 3G 850MHz. No importa.";
+			};
+		}
+		if ($BandaInput == "UMTSAWS"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->UMTSAWSResult = "OK";
+				return "La operadora posee banda 3G 1700/2100MHz. (AWS) y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->UMTSAWSResult = "ERROR";
+				return "La operadora posee banda 3G 1700/2100MHz. (AWS) pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->UMTSAWSResult = "IRRELEVANT";
+				return "La operadora no posee banda 3G 1700/2100MHz. (AWS) y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->UMTSAWSResult = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 3G 1700/2100MHz. (AWS) No importa.";
+			};
+		}
+		if ($BandaInput == "LTE2600"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->LTE2600Result = "OK";
+				return "La operadora posee banda 4G 2600MHz. y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->LTE2600Result = "ERROR";
+				return "La operadora posee banda 4G 2600MHz. pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->LTE2600Result = "IRRELEVANT";
+				return "La operadora no posee banda 4G 2600MHz. y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->LTE2600Result = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 4G 2600MHz. No importa.";
+			};
+		}
+		if ($BandaInput == "LTE700"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->LTE700Result = "OK";
+				return "La operadora posee banda 4G 700MHz. y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->LTE700Result = "ERROR";
+				return "La operadora posee banda 4G 700MHz. pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->LTE700Result = "IRRELEVANT";
+				return "La operadora no posee banda 4G 700MHz. y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->LTE700Result = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 4G 700MHz. No importa.";
+			};
+		}
+		if ($BandaInput == "LTEAWS"){
+			if ($OperadoraInput == "TRUE" && $TelefonoInput == "TRUE"){
+				$this->LTEAWSResult = "OK";
+				return "La operadora posee banda 4G 1700/2100MHz. (AWS) y el teléfono es compatible.";
+			}
+			elseif ($OperadoraInput == "TRUE" && $TelefonoInput == "FALSE"){
+				$this->LTEAWSResult = "ERROR";
+				return "La operadora posee banda 4G 1700/2100MHz. (AWS) pero el teléfono no es compatible.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "TRUE"){
+				$this->LTEAWSResult = "IRRELEVANT";
+				return "La operadora no posee banda 4G 1700/2100MHz. (AWS) y el teléfono sí. No importa.";
+			}
+			elseif ($OperadoraInput == "FALSE" && $TelefonoInput == "FALSE"){
+				$this->LTEAWSResult = "IRRELEVANT";
+				return "Ni la operadora ni el teléfono poseen banda 4G 1700/2100MHz. (AWS) No importa.";
+			};
+		}
+	}
+
+	function ProcessResult (){
+		if ($this->GSM1900Result == "ERROR" || $this->GSM900Result == "ERROR" || $this->GSM850Result == "ERROR"){
+			if ($this->GSM1900Result == "OK" || $this->GSM900Result == "OK" || $this->GSM850Result == "OK"){
+				$this->GSMResult = "PARTIAL";
+			}
+			else {
+				$this->GSMResult = "ERROR";
+			};
+		}
+		else {
+			$this->GSMResult = "OK";
+		};
+
+		if ($this->UMTS1900Result == "ERROR" || $this->UMTS900Result == "ERROR" || $this->UMTS850Result == "ERROR" || $this->UMTSAWSResult == "ERROR"){
+			if ($this->UMTS1900Result == "OK" || $this->UMTS900Result == "OK" || $this->UMTS850Result == "OK" || $this->UMTSAWSResult == "OK"){
+				$this->UMTSResult = "PARTIAL";
+			}
+			else {
+				$this->UMTSResult = "ERROR";
+			};
+		}
+		else {
+			$this->UMTSResult = "OK";
+		};
+
+		if ($this->LTE2600Result == "ERROR" || $this->LTE700Result == "ERROR" || $this->LTEAWSResult == "ERROR"){
+			if ($this->LTE2600Result == "OK" || $this->LTE700Result == "OK" || $this->LTEAWSResult == "OK"){
+				$this->LTEResult = "PARTIAL";
+			}
+			else {
+				$this->LTEResult = "ERROR";
+			};
+		}
+		else {
+			$this->LTEResult = "OK";
+		};
+	}
+
+  function ProcessLTEA($Operadora, $Telefono, $OperadoraNombre){
+    if ($Operadora == "TRUE" && $Telefono == "TRUE"){
+      //Operadora y teléfono comaptibles
+      $this->LTEABoxText = $this->OKIcon . " Compatible con 4G+";
+      $this->LTEABoxType = "Success";
+      $this->LTEAResponse = 'es compatible con 4G+.';
+    }
+    elseif ($Operadora == "TRUE" && $Telefono == "FALSE"){
+      //Solo operadora compatible
+      $this->LTEABoxText = $this->DangerIcon . " No compatible con 4G+";
+      $this->LTEABoxType = "danger";
+      $this->LTEAResponse = 'no es compatible con 4G+.';
+    }
+    elseif ($Operadora == "FALSE" && $Telefono == "TRUE"){
+      //Solo teléfono compatible
+      $this->LTEABoxText = $this->WarningIcon . " Compatible con 4G+";
+      $this->LTEABoxType = "warning";
+      $this->LTEAResponse = 'es compatible con 4G+ pero ' . $OperadoraNombre . ' no posee este servicio.';
+    }
+    elseif ($Operadora == "FALSE" && $Telefono == "FALSE"){
+      //Ninguno es compatible
+      $this->LTEABoxText = $this->DangerIcon . " No compatible con 4G+";
+      $this->LTEABoxType = "danger";
+      $this->LTEAResponse = 'no es compatible con 4G+.';
+    }
+  }
 }
