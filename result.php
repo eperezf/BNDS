@@ -10,6 +10,36 @@ $Operadora = new Operadora($_GET["Operadora"]);
 $Operadora->GetBandas();
 $Telefono = new Telefono($_GET["Telefono"]);
 
+if ($_GET["Telefono"] == ""){
+  $_SESSION["Alert"] = "Por favor busca un teléfono";
+  header("Location: /");
+  die;
+}
+
+if (!isset($Telefono->Marca)){
+  $_SESSION["Alert"] = 'El teléfono que buscaste no existe. Puedes solicitarlo <a href="/contacto">haciendo click aquí</a>.';
+  header("Location: /");
+  die;
+}
+
+if ($Telefono->Marca == ""){
+  $_SESSION["Alert"] = 'El teléfono que buscaste no existe. Puedes solicitarlo <a href="/contacto">haciendo click aquí</a>.';
+  header("Location: /");
+  die;
+}
+
+if ($Operadora->Nombre == ""){
+  $_SESSION["Alert"] = "La operadora no existe";
+  header("Location: /");
+  die;
+}
+
+if ($_GET["Operadora"] == ""){
+  $_SESSION["Alert"] = "Por favor selecciona una operadora";
+  header("Location: /");
+  die;
+}
+
 $Comparacion = new Comparacion;
 
 $GSMList = "";
@@ -32,10 +62,9 @@ $LTEAWS = $Comparacion->ProcessBand($Operadora->LTEAWS, $Telefono->LTEAWS, "LTEA
 
 $Comparacion->ProcessLTEA($Operadora->LTEA, $Telefono->LTEA, $Operadora->Nombre);
 $Comparacion->ProcessHDVoice($Operadora->HDVoice, $Telefono->HDVoice, $Operadora->Nombre);
+$Comparacion->ProcessSAE($Telefono->SAE);
 
 $Comparacion->ProcessResult();
-
-
 
 if ($Comparacion->GSMResult == "OK"){
   $GSMBoxText = $Func->OKIcon . "100% Compatible con 2G";
@@ -231,53 +260,6 @@ if ($LTEList == ""){
   $LTEBoxType = "danger";
 }
 
-
-
-
-
-if ($Telefono->SAE == "TRUE"){
-    $SAEBoxText = $Func->OKIcon . " Compatible con SAE";
-    $SAEBoxType = "Success";
-    $SAEResponse = 'es compatible con el Sistema de Alertas de Emergencia.';
-  }
-  else {
-    $SAEBoxText = $Func->DangerIcon . " No compatible con SAE";
-    $SAEBoxType = "danger";
-    $SAEResponse = "no es compatible con el Sistema de Alertas de Emergencia.";
-  };
-
-
-
-if ($_GET["Telefono"] == ""){
-  $_SESSION["Alert"] = "Por favor busca un teléfono";
-  header("Location: /");
-  die;
-}
-
-if (!isset($Telefono->Marca)){
-  $_SESSION["Alert"] = 'El teléfono que buscaste no existe. Puedes solicitarlo <a href="/contacto">haciendo click aquí</a>.';
-  header("Location: /");
-  die;
-}
-
-if ($Telefono->Marca == ""){
-  $_SESSION["Alert"] = 'El teléfono que buscaste no existe. Puedes solicitarlo <a href="/contacto">haciendo click aquí</a>.';
-  header("Location: /");
-  die;
-}
-
-if ($Operadora->Nombre == ""){
-  $_SESSION["Alert"] = "La operadora no existe";
-  header("Location: /");
-  die;
-}
-
-if ($_GET["Operadora"] == ""){
-  $_SESSION["Alert"] = "Por favor selecciona una operadora";
-  header("Location: /");
-  die;
-}
-
 $OpQuery = "SELECT `Nombre` FROM `Operadoras` ORDER BY `Nombre` ASC";
 $OpResult = mysqli_query($conn, $OpQuery);
 
@@ -414,15 +396,15 @@ $LinkFotoOp = str_replace("ó", "o", $LinkFotoOp);
                       </div>
                     </div>
                   </div>
-                  <div class="panel panel-<?php echo $SAEBoxType ?>">
+                  <div class="panel panel-<?php echo $Comparacion->SAEBoxType ?>">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#SAE"><?php echo $SAEBoxText ?><span class="pull-right glyphicon glyphicon-chevron-down"></span></a>
+                        <a data-toggle="collapse" href="#SAE"><?php echo $Comparacion->SAEBoxText ?><span class="pull-right glyphicon glyphicon-chevron-down"></span></a>
                       </h4>
                     </div>
                     <div id="SAE" class="panel-collapse collapse">
                       <div class="panel-body">
-                        <p>El <?php echo $Telefono->Marca ?> <?php echo $Telefono->Modelo ?> <?php if ($Telefono->Variante != ""){ echo "variante";} ?> <?php echo $Telefono->Variante ?> <?php echo $SAEResponse ?></p>
+                        <p>El <?php echo $Telefono->Marca ?> <?php echo $Telefono->Modelo ?> <?php if ($Telefono->Variante != ""){ echo "variante";} ?> <?php echo $Telefono->Variante ?> <?php echo $Comparacion->SAEResponse ?></p>
                       </div>
                     </div>
                   </div>

@@ -641,11 +641,4 @@ class InputPhone {
 	//Función para insertar las bandas del teléfono END
 }
 
-
-
-
-
-
-
-
 ?>

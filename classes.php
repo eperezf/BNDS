@@ -330,12 +330,13 @@ class Telefono {
 	public $Modelo;
 	public $Variante;
 	public $LinkReview;
-	public $Identical;
-	public $Similar;
+	public $Identical = "TRUE";
+	public $Similar = "FALSE";
 	public $NombreCompleto;
 	public $LTEA = "FALSE";
 	public $HDVoice = "FALSE";
 	public $SAE = "FALSE";
+  public $Slug;
 
 	//Datos de las Banda del teléfono
 	public $GSM1900 = "FALSE";
@@ -360,6 +361,7 @@ class Telefono {
   		$this->Marca = $row["Marca"];
   		$this->Modelo = $row["Modelo"];
   		$this->Variante = $row["Variante"];
+      $this->Slug = $row["Slug"];
       $this->NombreCompleto = $row["NombreCompleto"];
   		$this->LinkReview = $row["LinkReview"];
       if ($row["LTEA"] == "1"){
@@ -385,6 +387,7 @@ class Telefono {
 	  		$this->Marca = $row["Marca"];
 	  		$this->Modelo = $row["Modelo"];
 	  		$this->Variante = $row["Variante"];
+        $this->Slug = $row["Slug"];
         $this->NombreCompleto = $row["NombreCompleto"];
 	  		$this->LinkReview = $row["LinkReview"];
 	  		$this->LTEA = $row["LTEA"];
@@ -468,6 +471,10 @@ class Comparacion {
   public $HDVoiceBoxText;
   public $HDVoiceBoxType;
   public $HDVoiceResponse;
+
+  public $SAEBoxText;
+  public $SAEBoxType;
+  public $SAEResponse;
 
 	function ProcessBand ($OperadoraInput, $TelefonoInput, $BandaInput){
 
@@ -747,5 +754,18 @@ class Comparacion {
       $this->HDVoiceBoxType = "danger";
       $this->HDVoiceResponse = 'no es compatible con Voz HD.';
     }
+  }
+
+  function ProcessSAE($Telefono){
+    if ($Telefono == "TRUE"){
+      $this->SAEBoxText = $this->OKIcon . " Compatible con SAE";
+      $this->SAEBoxType = "Success";
+      $this->SAEResponse = 'es compatible con el Sistema de Alertas de Emergencia.';
+    }
+    else {
+      $this->SAEBoxText = $this->DangerIcon . " No compatible con SAE";
+      $this->SAEBoxType = "danger";
+      $this->SAEResponse = "no es compatible con el Sistema de Alertas de Emergencia.";
+    };
   }
 }
