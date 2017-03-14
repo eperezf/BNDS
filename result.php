@@ -31,6 +31,7 @@ $LTE700 = $Comparacion->ProcessBand($Operadora->LTE700, $Telefono->LTE700, "LTE7
 $LTEAWS = $Comparacion->ProcessBand($Operadora->LTEAWS, $Telefono->LTEAWS, "LTEAWS");
 
 $Comparacion->ProcessLTEA($Operadora->LTEA, $Telefono->LTEA, $Operadora->Nombre);
+$Comparacion->ProcessHDVoice($Operadora->HDVoice, $Telefono->HDVoice, $Operadora->Nombre);
 
 $Comparacion->ProcessResult();
 
@@ -232,30 +233,7 @@ if ($LTEList == ""){
 
 
 
-if ($Operadora->HDVoice == "TRUE" && $Telefono->HDVoice == "TRUE"){
-  //Operadora y teléfono comaptibles
-  $HDVoiceBoxText = $Func->OKIcon . " Compatible con Voz HD";
-  $HDVoiceBoxType = "Success";
-  $HDVoiceResponse = 'es compatible con Voz HD.';
-}
-elseif ($Operadora->HDVoice == "TRUE" && $Telefono->HDVoice == "FALSE"){
-  //Solo operadora compatible
-  $HDVoiceBoxText = $Func->DangerIcon . " No compatible con Voz HD";
-  $HDVoiceBoxType = "danger";
-  $HDVoiceResponse = 'no es compatible con Voz HD.';
-}
-elseif ($Operadora->HDVoice == "FALSE" && $Telefono->HDVoice == "TRUE"){
-  //Solo teléfono compatible
-  $HDVoiceBoxText = $Func->WarningIcon . " Compatible con Voz HD";
-  $HDVoiceBoxType = "warning";
-  $HDVoiceResponse = 'es compatible con Voz HD pero ' . $Operadora->Nombre . ' no posee este servicio.';
-}
-elseif ($Operadora->HDVoice == "FALSE" && $Telefono->HDVoice == "FALSE"){
-  //Ninguno es compatible
-  $HDVoiceBoxText = $Func->DangerIcon . " No compatible con Voz HD";
-  $HDVoiceBoxType = "danger";
-  $HDVoiceResponse = 'no es compatible con Voz HD.';
-}
+
 
 if ($Telefono->SAE == "TRUE"){
     $SAEBoxText = $Func->OKIcon . " Compatible con SAE";
@@ -424,15 +402,15 @@ $LinkFotoOp = str_replace("ó", "o", $LinkFotoOp);
                       </div>
                     </div>
                   </div>
-                  <div class="panel panel-<?php echo $HDVoiceBoxType ?>">
+                  <div class="panel panel-<?php echo $Comparacion->HDVoiceBoxType ?>">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#HDVoice"><?php echo $HDVoiceBoxText ?><span class="pull-right glyphicon glyphicon-chevron-down"></span></a>
+                        <a data-toggle="collapse" href="#HDVoice"><?php echo $Comparacion->HDVoiceBoxText ?><span class="pull-right glyphicon glyphicon-chevron-down"></span></a>
                       </h4>
                     </div>
                     <div id="HDVoice" class="panel-collapse collapse">
                       <div class="panel-body">
-                        <p>El <?php echo $Telefono->Marca ?> <?php echo $Telefono->Modelo ?> <?php if ($Telefono->Variante != ""){ echo "variante";} ?> <?php echo $Telefono->Variante ?> <?php echo $HDVoiceResponse ?></p>
+                        <p>El <?php echo $Telefono->Marca ?> <?php echo $Telefono->Modelo ?> <?php if ($Telefono->Variante != ""){ echo "variante";} ?> <?php echo $Telefono->Variante ?> <?php echo $Comparacion->HDVoiceResponse ?></p>
                       </div>
                     </div>
                   </div>

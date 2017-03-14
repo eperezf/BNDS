@@ -465,6 +465,10 @@ class Comparacion {
   public $LTEABoxType;
   public $LTEAResponse;
 
+  public $HDVoiceBoxText;
+  public $HDVoiceBoxType;
+  public $HDVoiceResponse;
+
 	function ProcessBand ($OperadoraInput, $TelefonoInput, $BandaInput){
 
 		if ($BandaInput == "GSM1900"){
@@ -715,6 +719,33 @@ class Comparacion {
       $this->LTEABoxText = $this->DangerIcon . " No compatible con 4G+";
       $this->LTEABoxType = "danger";
       $this->LTEAResponse = 'no es compatible con 4G+.';
+    }
+  }
+
+  function ProcessHDVoice($Operadora, $Telefono, $OperadoraNombre){
+    if ($Operadora == "TRUE" && $Telefono == "TRUE"){
+      //Operadora y teléfono comaptibles
+      $this->HDVoiceBoxText = $this->OKIcon . " Compatible con Voz HD";
+      $this->HDVoiceBoxType = "Success";
+      $this->HDVoiceResponse = 'es compatible con Voz HD.';
+    }
+    elseif ($Operadora == "TRUE" && $Telefono == "FALSE"){
+      //Solo operadora compatible
+      $this->HDVoiceBoxText = $this->DangerIcon . " No compatible con Voz HD";
+      $this->HDVoiceBoxType = "danger";
+      $this->HDVoiceResponse = 'no es compatible con Voz HD.';
+    }
+    elseif ($Operadora == "FALSE" && $Telefono == "TRUE"){
+      //Solo teléfono compatible
+      $this->HDVoiceBoxText = $this->WarningIcon . " Compatible con Voz HD";
+      $this->HDVoiceBoxType = "warning";
+      $this->HDVoiceResponse = 'es compatible con Voz HD pero ' . $OperadoraNombre . ' no posee este servicio.';
+    }
+    elseif ($Operadora == "FALSE" && $Telefono == "FALSE"){
+      //Ninguno es compatible
+      $this->HDVoiceBoxText = $this->DangerIcon . " No compatible con Voz HD";
+      $this->HDVoiceBoxType = "danger";
+      $this->HDVoiceResponse = 'no es compatible con Voz HD.';
     }
   }
 }
